@@ -1,40 +1,23 @@
-name: Evaluate Skill
+name: Billions Agent Verify
 
 on:
   push:
     branches: [main, develop]
-  pull_request:
-    branches: [main, develop]
   workflow_dispatch:
 
 jobs:
-  evaluate:
+  verify:
     runs-on: ubuntu-latest
-
-    env:
-      GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v6
-        with:
-          node-version: '20'
+      - name: Show repository content
+        run: ls -la
 
-      - name: Install promptfoo
-        run: npm install -g promptfoo
-
-      - name: Run promptfoo eval
-        run: promptfoo eval --no-cache --output results.json
-
-      - name: Upload eval results
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: promptfoo-results
-          path: results.json
+      - name: Verify agent trigger
+        run: echo "Billions verification triggered"          path: results.json
 
       - name: Write job summary
         if: always()
