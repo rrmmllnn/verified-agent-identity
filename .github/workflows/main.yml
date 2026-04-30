@@ -1,4 +1,4 @@
-name: Verify Human Identity
+name: name: Verify Human Identity
 
 on:
   workflow_dispatch:
@@ -21,12 +21,13 @@ jobs:
 
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version: "20"
+          cache: "npm"
 
       - name: Install ClawHub skill
         run: npx clawhub@latest install verified-agent-identity
